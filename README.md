@@ -11,6 +11,8 @@
  実行ファイル test ができるので、動作を確認する
 
 # 使用法
+
+## プログラムソース
 ```C++:example
 #include <geomag.h>
 
@@ -29,3 +31,10 @@ int main(void){
     Altitude_in_km, Latitude_in_deg, Longitude_in_deg,
     Declination_in_deg, Inclination_in_deg, Total_Intensity_in_nT);
 ```
+
+## コンパイル
+```Tcsh:
+% g++ -c main.cpp -I/home/XXX/include
+% g++ -o main main.o -Wl,-R/home/XXX/lib -L/home/XXXlib -ligrf_YY
+```
+XXX はホームディレクトリ名、_YY はライブラリのコンパイル時のサフィクス
