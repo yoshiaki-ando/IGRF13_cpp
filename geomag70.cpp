@@ -275,22 +275,22 @@ FILE *stream = NULL;                /* Pointer to specified model data file */
 
   /*  Subroutines used  */
   
-  void print_dashed_line();
-  void print_long_dashed_line(void);
-  void print_header();
-  void print_result(double date, double d, double i, double h, double x, double y, double z, double f);
-  void print_header_sv();
-  void print_result_sv(double date, double ddot, double idot, double hdot, double xdot, double ydot, double zdot, double fdot);
-  void print_result_file(FILE *outf, double d, double i, double h, double x, double y, double z, double f,
+void print_dashed_line();
+void print_long_dashed_line(void);
+void print_header();
+void print_result(double date, double d, double i, double h, double x, double y, double z, double f);
+void print_header_sv();
+void print_result_sv(double date, double ddot, double idot, double hdot, double xdot, double ydot, double zdot, double fdot);
+void print_result_file(FILE *outf, double d, double i, double h, double x, double y, double z, double f,
                          double ddot, double idot, double hdot, double xdot, double ydot, double zdot, double fdot);
-  double degrees_to_decimal(int degrees,int minutes,int seconds);
+double degrees_to_decimal(int degrees,int minutes,int seconds);
 double julday(int, int, int);
-  int   interpsh(double date, double dte1, int nmax1, double dte2, int nmax2, int gh);
-  int   extrapsh(double date, double dte1, int nmax1, int nmax2, int gh);
-  int   shval3(int igdgc, double flat, double flon, double elev, int nmax, int gh, int iext, double ext1, double ext2, double ext3);
-  int   dihf(int, double &d, double &i, double &f);
-  int   safegets(char *buffer,int n);
-  int getshc(char file[PATH], int iflag, long int strec, int nmax_of_gh, int gh);
+int   interpsh(double date, double dte1, int nmax1, double dte2, int nmax2, int gh);
+int   extrapsh(double date, double dte1, int nmax1, int nmax2, int gh);
+int   shval3(int igdgc, double flat, double flon, double elev, int nmax, int gh, int iext, double ext1, double ext2, double ext3);
+int   dihf(int, double &d, double &i, double &f);
+int   safegets(char *buffer,int n);
+int getshc(char file[PATH], int iflag, long int strec, int nmax_of_gh, int gh);
 
 //int main(int argc, char**argv)
 void calc_geomagnetic_field
@@ -300,9 +300,11 @@ void calc_geomagnetic_field
  double &d, double &i, double &f
  )
 {
+  stream = NULL; /* reset stream by Ando */
 #ifdef MAC
   ccommand(argc, argv);
 #endif
+
   /*  Variable declaration  */
   int argc = 1;
   char **argv = new char* [1];
@@ -479,6 +481,7 @@ void calc_geomagnetic_field
       
       /* Switch on how many arguments are supplied. */
       /* Note that there are no 'breaks' after the cases, so these are entry points */
+
       switch(argc)
         {
         case 7 : strncpy(inbuff, args[6], MAXREAD);
@@ -677,7 +680,7 @@ void calc_geomagnetic_field
       warn_H_strong = 0;
       warn_H_strong_val = 99999.0;
       warn_P = 0;
-      
+
       if (need_to_read_model) 
         {
           while (stream == NULL)
@@ -956,11 +959,15 @@ void calc_geomagnetic_field
       /* Pick model */
       for (modelI=0; modelI<nmodel; modelI++)
         if (sdate<yrmax[modelI]) break;
+
       if (modelI == nmodel) modelI--;           /* if beyond end of last model use last model */
       
       /* Get altitude min and max for selected model. */
+
       minalt=altmin[modelI];
       maxalt=altmax[modelI];
+
+      
       
       /* Get Coordinate prefs */
 
@@ -1021,6 +1028,7 @@ void calc_geomagnetic_field
 
       if (coords_from_file && !arg_err && (alt < minalt || alt > maxalt))
         {printf("\nError: unrecognized altitude %s in coordinate file line %1d\n\n",args[4],iline); arg_err = 1;} 
+
 
       while ((alt<minalt)||(alt>maxalt))
         {
