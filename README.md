@@ -1,3 +1,45 @@
+# C++ Wrapper for IGRF (13th gen.)
+
+# Install
+1. edit Makefile, eps. PREFIX
+
+2. make; make install
+
+3. make test
+  executable file "test"
+
+# Usage
+
+## Sample program
+```C++:example
+#include <geomag.h>
+
+int main(void){
+  int Year  { 2021 };
+  int Month {    8 };
+  int Day   {   15 };
+  double Altitude_in_km { 90.0 };
+  double Latitude_in_deg { 35.656 }; /* +90 〜 -90 */
+  double Longitude_in_deg { 139.544 }; /* -180 〜 +180 */
+  double Declination_in_deg;
+  double Inclination_in_deg;
+  double Total_Intensity_in_nT;
+
+  calc_geomagnetic_field(Year, Month, Day,
+    Altitude_in_km, Latitude_in_deg, Longitude_in_deg,
+    Declination_in_deg, Inclination_in_deg, Total_Intensity_in_nT);
+```
+
+## Compile
+```Tcsh:
+% g++ -c main.cpp -I/home/XXX/include
+% g++ -o main main.o -Wl,-R/home/XXX/lib -L/home/XXXlib -ligrf_YY
+```
+XXX is the home directory, _YY is the suffix specified in Makefile.
+
+
+---
+
 # IGRF (13th gen.) を C++ で呼び出す
 
 # インストール
@@ -38,3 +80,4 @@ int main(void){
 % g++ -o main main.o -Wl,-R/home/XXX/lib -L/home/XXXlib -ligrf_YY
 ```
 XXX はホームディレクトリ名、_YY はライブラリのコンパイル時のサフィクス
+
