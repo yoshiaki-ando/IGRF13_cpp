@@ -1,7 +1,7 @@
 # C++ Wrapper for IGRF (13th gen.)
 
 # Install
-1. edit Makefile, eps. PREFIX
+1. edit Makefile, esp. PREFIX
 
 2. make; make install
 
@@ -33,7 +33,7 @@ int main(void){
 ## Compile
 ```Tcsh:
 % g++ -c main.cpp -I/home/XXX/include
-% g++ -o main main.o -Wl,-R/home/XXX/lib -L/home/XXXlib -ligrf_YY
+% g++ -o main main.o -Wl,-R/home/XXX/lib -L/home/XXX/lib -ligrf_YY
 ```
 XXX is the home directory, _YY is the suffix specified in Makefile.
 
@@ -77,7 +77,7 @@ int main(void){
 ## コンパイル
 ```Tcsh:
 % g++ -c main.cpp -I/home/XXX/include
-% g++ -o main main.o -Wl,-R/home/XXX/lib -L/home/XXXlib -ligrf_YY
+% g++ -o main main.o -Wl,-R/home/XXX/lib -L/home/XXX/lib -ligrf_YY
 ```
 XXX はホームディレクトリ名、_YY はライブラリのコンパイル時のサフィクス
 
